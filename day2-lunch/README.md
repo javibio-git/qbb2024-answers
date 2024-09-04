@@ -28,7 +28,7 @@ chr1, chr10, chr18, chr8 = 1; chr9 = 5, chr15 = 6, chr16 = 8, chr2 = 45, chr22 =
 
 ## Answer 5
 
-This is a bit more advance but you can find more info about regular expression [here](https://www.digitalocean.com/community/tutorials/using-grep-regular-expressions-to-search-for-text-patterns-in-linux#bracket-expressions)
+This is a bit more advanced but you can find more info about regular expressions [here](https://www.digitalocean.com/community/tutorials/using-grep-regular-expressions-to-search-for-text-patterns-in-linux#bracket-expressions)
 
 `grep "gene_type \"[A-Za-z_]*_pseudogene" gene.gtf | wc -l`
 
