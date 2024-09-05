@@ -1,3 +1,3 @@
 # qbb2024-answers
 
-I'm having fun today.
+This is a repository to share the answers for the Quantitative Biology Bootcamp 2024.
