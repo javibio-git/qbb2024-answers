@@ -52,3 +52,68 @@ for my_line in my_file:
 my_file.close()
 
 ```
+
+## Answer 3 
+
+My take on `gtf2bed.py` 
+
+```
+#!/usr/bin/env python3
+
+import sys
+
+my_file = open( sys.argv[1] )
+
+
+for my_line in my_file:
+    if "##" in my_line:
+        continue
+    my_line = my_line.rstrip("\n")
+    fields = my_line.split("\t")
+    if "gene" in fields[2]:
+        fields2 = fields[8].split(";")
+        for my_name in fields2:
+            if "gene_name" in my_name:
+                gname = my_name
+        gene_name = gname.replace("\"", "")
+        gene_name = gene_name.replace("gene_name ", "")
+        newline = fields[0] + "\t" + fields[3] + "\t" + fields[4] + "\t" + gene_name
+        print( newline)
+
+my_file.close()
+
+```
+
+## Answer 4
+
+This is the fixed `tally.py` script now called `tally-fixed.py`
+
+```
+
+#!/usr/bin/env python3
+
+# Compare to grep -v "#" | cut -f 1 | uniq -c
+# ... spot and fix the three bugs in this code
+
+import sys
+
+my_file = open( sys.argv[1] )
+
+chr = "chr1"
+count = 0
+
+for my_line in my_file:
+    if "#" in my_line:
+        continue
+    fields = my_line.split("\t")
+    if fields[0] != chr:
+        print( count, chr )
+        chr = fields[0]
+        count = 1
+        continue
+    count = count + 1
+print( count, chr)
+
+my_file.close()
+
+```
