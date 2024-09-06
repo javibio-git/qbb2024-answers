@@ -67,7 +67,7 @@ for i in range(10):
 ## Answer 4
 
 # Calculate the mean values for the first 10 genes using numpy
-#mean_values = numpy.mean(expression[:10], axis=1)
+mean_values = numpy.mean(expression[:10, : ], axis=1)
 
 #print(mean_values)
 
