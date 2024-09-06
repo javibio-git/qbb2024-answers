@@ -5,16 +5,24 @@
 To decompress `*.gz` files you can use `gunzip` for instance: `gunzip GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct.gz`, which will create a new file called `GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct`. The old `gz` file will be removed (but there are ways to preserve the original file).
 
 ### Pseudocode
+
+```
 open file
+
 skip 2 lines
+
 split column header by tabs and skip first two entries
+
 create way to hold gene names
+
 create way to hold expression values
+
 for each line
 	split line
 	save field 0 into gene IDs
 	save field 1 into gene names
 	save 2+ into expression values
+```
 
 ### Python code
 ```
