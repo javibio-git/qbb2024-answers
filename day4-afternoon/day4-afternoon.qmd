@@ -47,6 +47,46 @@ library(broom)
 head(penguins)
 glimpse(penguins)
 
+# is there a relationship between bill length and depth
+
+# this interpretation is not correct
+lm(data = penguins,
+   formula = bill_length_mm ~ 1 + bill_depth_mm) %>%
+  summary()
+
+# plot and color by species and fit a linear model for each species data
+ggplot(data = penguins, 
+       mapping = aes(x = bill_depth_mm,y = bill_length_mm,color = species)) +
+  geom_point() +
+  stat_smooth(method = "lm")
+# plot and color by species and fit a linear data for the data as a whole
+ggplot(data = penguins, 
+       mapping = aes(x = bill_depth_mm,y = bill_length_mm)) +
+  geom_point(aes(color = species)) +
+  stat_smooth(method = "lm")
+
+# Do it by species
+lm(data = penguins %>% filter(species == "Adelie"),
+   formula = bill_length_mm ~ 1 + bill_depth_mm) %>%
+  summary()
+
+# consider all species together
+full_model <- lm(data = penguins,
+   formula = bill_length_mm ~ 1 + bill_depth_mm + species)
+summary(full_model)
+reduced_model <- lm(data = penguins,
+                    formula = bill_length_mm ~ 1, bill_depth_mm)
+# to test a more general question
+anova(full_model, reduced_model)
+
+# consider all species together considering interactions of the predictor variables
+lm(data = penguins,
+   formula = bill_length_mm ~ 1 + bill_depth_mm * species) %>%
+  summary()
 
 
+# consider all species together and sex
+lm(data = penguins,
+   formula = bill_length_mm ~ 1 + bill_depth_mm + species + sex) %>%
+  summary()
 ```
