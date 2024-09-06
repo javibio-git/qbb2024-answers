@@ -20,7 +20,7 @@ S = "it was the best of times it was the worst of times"
 
 S = S.split()
 
-print(S)
+#print(S)
 
 first = {}
 
@@ -46,4 +46,15 @@ for i in range(len(S)):
         counts[char] = 0
     counts[char] += 1
 
-print(counts)
+#print(counts)
+
+
+metadata = [["S001", "P001", "Heart"]]
+metadict = {}
+for i in range(len(metadata)):
+    sample, patient, tissue = metadata[i]
+    key = (patient, tissue)
+    metadict.setdefault(key, [])
+    metadict[key].append(sample)
+
+print(metadict)
