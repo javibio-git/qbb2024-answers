@@ -1,0 +1,52 @@
+---
+title: "QBB2024-JHU - Day 4 (Linear Regression)"
+author: "Javier Carpinteyro Ponce"
+format: html
+editor: visual
+code-annotations: hover
+date: 07/16/2024
+editor_options: 
+  chunk_output_type: console
+toc: true
+self-contained: true
+---
+
+## Linear Regression using R
+
+```{r}
+#| warning: false
+#| echo: true
+
+library(tidyverse)
+
+iris_setosa <- iris %>% 
+  filter(Species == "setosa")
+head(iris_setosa)
+ggplot(data = iris_setosa, mapping = aes(x = Sepal.Width, y = Sepal.Length)) +
+  geom_point() + 
+  stat_smooth(method = "lm")
+  
+
+model <- lm(data = iris_setosa,formula = "Sepal.Length ~ 1 + Sepal.Width")
+
+summary(model)
+
+
+
+```
+
+## Working with the penguins data set
+
+```{r}
+#| warning: false
+#| echo: true
+
+library(palmerpenguins)
+library(broom)
+
+head(penguins)
+glimpse(penguins)
+
+
+
+```
