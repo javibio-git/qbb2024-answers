@@ -74,6 +74,7 @@ lm(data = penguins %>% filter(species == "Adelie"),
 full_model <- lm(data = penguins,
    formula = bill_length_mm ~ 1 + bill_depth_mm + species)
 summary(full_model)
+
 reduced_model <- lm(data = penguins,
                     formula = bill_length_mm ~ 1, bill_depth_mm)
 # to test a more general question
@@ -86,7 +87,27 @@ lm(data = penguins,
 
 
 # consider all species together and sex
-lm(data = penguins,
-   formula = bill_length_mm ~ 1 + bill_depth_mm + species + sex) %>%
-  summary()
+full_model_species <- lm(data = penguins %>% filter(!is.na(sex)),
+   formula = bill_length_mm ~ 1 + bill_depth_mm + species)
+summary(full_model_species)
+full_model_species_sex <- lm(data = penguins %>% filter(!is.na(sex)),
+   formula = bill_length_mm ~ 1 + bill_depth_mm + species + sex)
+summary(full_model_species_sex)
+#anova(full_model_species_sex,full_model_species)
+
+# what is the predicted bill length of a male Gentoo
+# penguin with a bill depth of 17.5 mm?
+
+# y = b_0 + b_1*x_1 + b_2*x_2 + b_3*x_3 + b_4*x_4
+
+27.6224 + 0.5317*(17.5) + 9.9709*(0) + 10.4890*(1) + 2.8938*(2)
+
+new_penguin <- tibble(
+  species = "Gentoo",
+  bill_depth_mm = 17.5,
+  sex = "male"
+)
+
+predict(full_model_species_sex, newdata = new_penguin)
+
 ```
